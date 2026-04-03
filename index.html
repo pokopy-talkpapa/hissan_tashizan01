@@ -312,7 +312,11 @@
     100% { transform: translateX(0); }
   }
 
-  .calcArea.shake {
+ .shakeTarget {
+    width: 100%;
+  }
+  
+  .shakeTarget.shake {
     animation: shake .22s ease;
   }
 
@@ -433,24 +437,26 @@
         <div class="card">
           <div id="cardInner" class="cardInner">
             <div id="calcArea" class="calcArea">
-              <div class="sumRow">
-                <div class="sumOp ghost">+</div>
-                <div class="sumDigit ghost">8</div>
-                <div id="topNum" class="sumDigit">6</div>
-              </div>
-
-              <div class="sumRow">
-                <div class="sumOp">+</div>
-                <div class="sumDigit ghost">8</div>
-                <div id="bottomNum" class="sumDigit">3</div>
-              </div>
-
-              <div class="sumLine"></div>
-
-              <div class="sumRow">
-                <div class="sumOp ghost">+</div>
-                <div class="sumDigit ghost">8</div>
-                <div id="answerNum" class="sumDigit answerValue">9</div>
+              <div id="shakeTarget" class="shakeTarget">
+                <div class="sumRow">
+                  <div class="sumOp ghost">+</div>
+                  <div class="sumDigit ghost">8</div>
+                  <div id="topNum" class="sumDigit">6</div>
+                </div>
+            
+                <div class="sumRow">
+                  <div class="sumOp">+</div>
+                  <div class="sumDigit ghost">8</div>
+                  <div id="bottomNum" class="sumDigit">3</div>
+                </div>
+            
+                <div class="sumLine"></div>
+            
+                <div class="sumRow">
+                  <div class="sumOp ghost">+</div>
+                  <div class="sumDigit ghost">8</div>
+                  <div id="answerNum" class="sumDigit answerValue">9</div>
+                </div>
               </div>
             </div>
 
@@ -515,6 +521,7 @@
 
   const calcArea = document.getElementById("calcArea");
   const messageArea = document.getElementById("messageArea");
+  const shakeTarget = document.getElementById("shakeTarget");
   const messageTitle = document.getElementById("messageTitle");
   const messageSub = document.getElementById("messageSub");
 
@@ -620,9 +627,9 @@
   }
 
   function shakeCard() {
-    calcArea.classList.remove("shake");
-    void calcArea.offsetWidth;
-    calcArea.classList.add("shake");
+    shakeTarget.classList.remove("shake");
+    void shakeTarget.offsetWidth;
+    shakeTarget.classList.add("shake");
   }
 
   function flashCorrect() {
