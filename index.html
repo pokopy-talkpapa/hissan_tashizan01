@@ -637,6 +637,11 @@
     void cardInner.offsetWidth;
     cardInner.classList.add("flashCorrect");
   }
+  
+  function clearEffects() {
+    shakeTarget.classList.remove("shake");
+    cardInner.classList.remove("flashCorrect");
+  }
 
   function pickProblem() {
     let a = Math.floor(Math.random() * 8) + 1;
@@ -646,6 +651,7 @@
   }
 
   function setProblem(problem) {
+    clearEffects();
     state.current = problem;
     topNum.textContent = String(problem.top);
     bottomNum.textContent = String(problem.bottom);
@@ -669,10 +675,11 @@
 
   function resetPractice() {
     clearTimers();
+    clearEffects();
     state.challengeRunning = false;
     state.challengeBusy = false;
     state.practiceLocked = false;
-
+  
     updateControls();
     setPadDisabled(false);
     setProblem(pickProblem());
@@ -680,17 +687,18 @@
 
   function resetChallengeReady() {
     clearTimers();
+    clearEffects();
     state.challengeRunning = false;
     state.challengeBusy = false;
     state.score = 0;
     state.misses = 0;
-
+  
     updateControls();
     setPadDisabled(true);
-
+  
     mainBtn.disabled = false;
     mainBtn.textContent = "スタート";
-
+  
     showMessage("30びょう", "スタートで はじめるよ");
   }
 
@@ -734,19 +742,20 @@
 
   function startChallenge() {
     clearTimers();
-
+    clearEffects();
+  
     state.challengeRunning = true;
     state.challengeBusy = false;
     state.score = 0;
     state.misses = 0;
     state.endAt = Date.now() + 30000;
-
+  
     mainBtn.disabled = true;
     mainBtn.textContent = "ちょうせん中";
-
+  
     setPadDisabled(false);
     setProblem(pickProblem());
-
+  
     state.timerId = setInterval(() => {
       if (Date.now() >= state.endAt) {
         endChallenge();
