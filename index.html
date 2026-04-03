@@ -327,52 +327,89 @@
   }
 
   @media (max-width: 560px) {
-    .wrap {
-      padding: 8px;
-    }
+  :root {
+    --card-w: min(96vw, 390px);
+  }
 
-    .panel {
-      padding: 10px 8px 14px;
-    }
+  .wrap {
+    padding: 6px;
+  }
 
-    .titleRow {
-      min-height: 92px;
-      margin-bottom: 4px;
-    }
+  .panel {
+    padding: 10px 8px 12px;
+  }
 
-    .title {
-      line-height: 1.4;
-      padding-top: 8px;
-      font-size: 21px;
-    }
+  .titleRow {
+    min-height: 92px;
+    margin-bottom: 2px;
+  }
 
-    .soundBtn {
-      top: 48px;
-      right: 0;
-      font-size: 14px;
-      padding: 9px 12px;
-    }
+  .title {
+    line-height: 1.35;
+    padding-top: 6px;
+    font-size: 20px;
+  }
 
-    .topModes {
-      margin: 2px 0 12px;
-      gap: 8px;
-    }
+  .soundBtn {
+    top: 46px;
+    right: 0;
+    font-size: 13px;
+    padding: 8px 10px;
+  }
 
-    .modeBtn {
-      min-width: 108px;
-      font-size: 14px;
-      padding: 11px 12px;
-    }
+  .topModes {
+    margin: 0 0 8px;
+    gap: 8px;
+  }
 
-    .calcArea {
-      right: 9%;
-      width: clamp(170px, 48vw, 230px);
-    }
+  .modeBtn {
+    min-width: 104px;
+    font-size: 14px;
+    padding: 10px 12px;
+  }
 
-    .digitBtn {
-      min-height: 68px;
-      font-size: 28px;
-    }
+  .card {
+    aspect-ratio: auto;
+    height: clamp(300px, 44vh, 360px);
+  }
+
+  .calcArea {
+    right: 4%;
+    top: 24px;
+    transform: none;
+    width: clamp(220px, 64vw, 280px);
+  }
+
+  .sumRow {
+    grid-template-columns: 34px 34px 88px;
+  }
+
+  .sumOp {
+    font-size: clamp(42px, 10vw, 64px);
+  }
+
+  .sumDigit {
+    font-size: clamp(72px, 16vw, 108px);
+  }
+
+  .sumLine {
+    margin: 6px 0 4px;
+  }
+
+  .pad {
+    margin: 8px auto 0;
+    gap: 8px;
+  }
+
+  .digitBtn {
+    min-height: 62px;
+    font-size: 26px;
+  }
+
+  .controls {
+    margin-top: 10px;
+  }
+}
   }
 </style>
 </head>
