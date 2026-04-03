@@ -312,7 +312,7 @@
     100% { transform: translateX(0); }
   }
 
-  .cardInner.shake {
+  .calcArea.shake {
     animation: shake .22s ease;
   }
 
@@ -620,9 +620,9 @@
   }
 
   function shakeCard() {
-    cardInner.classList.remove("shake");
-    void cardInner.offsetWidth;
-    cardInner.classList.add("shake");
+    calcArea.classList.remove("shake");
+    void calcArea.offsetWidth;
+    calcArea.classList.add("shake");
   }
 
   function flashCorrect() {
