@@ -246,6 +246,22 @@
     white-space: pre-line;
   }
 
+  .resultResetBtn {
+    margin-top: 14px;
+    border: 0;
+    border-radius: 12px;
+    padding: 10px 14px;
+    font-size: 14px;
+    font-weight: 900;
+    cursor: pointer;
+    background: #efefef;
+    color: var(--dark);
+  }
+
+  .resultResetBtn.hidden {
+    display: none;
+  }
+
   .controls {
     display: flex;
     justify-content: center;
@@ -464,6 +480,7 @@
               <div class="messageInner">
                 <p id="messageTitle" class="messageTitle">30びょう</p>
                 <p id="messageSub" class="messageSub">スタートで はじめるよ</p>
+                <button id="resultResetBtn" class="resultResetBtn hidden" type="button">ベストきろくを リセット</button>
               </div>
             </div>
           </div>
@@ -504,7 +521,8 @@
     soundOn: localStorage.getItem(STORAGE_SOUND_KEY) !== "off",
     timerId: null,
     nextId: null,
-    endAt: 0
+    endAt: 0,
+    showResetButton: false
   };
 
   const soundBtn = document.getElementById("soundBtn");
@@ -516,6 +534,7 @@
 
   const controls = document.getElementById("controls");
   const mainBtn = document.getElementById("mainBtn");
+  const resultResetBtn = document.getElementById("resultResetBtn");
 
   const cardInner = document.getElementById("cardInner");
 
@@ -604,9 +623,15 @@
     soundLabel.textContent = state.soundOn ? "おと ON" : "おと OFF";
   }
 
+  function updateResultResetButton() {
+    resultResetBtn.classList.toggle("hidden", !state.showResetButton);
+  }
+
   function showCalc() {
     calcArea.style.display = "block";
     messageArea.classList.remove("show");
+    state.showResetButton = false;
+    updateResultResetButton();
   }
 
   function showMessage(title, sub = "") {
@@ -614,6 +639,7 @@
     messageArea.classList.add("show");
     messageTitle.textContent = title;
     messageSub.textContent = sub;
+    updateResultResetButton();
   }
 
   function hideAnswer() {
@@ -679,6 +705,7 @@
     state.challengeRunning = false;
     state.challengeBusy = false;
     state.practiceLocked = false;
+    state.showResetButton = false;
   
     updateControls();
     setPadDisabled(false);
@@ -692,6 +719,7 @@
     state.challengeBusy = false;
     state.score = 0;
     state.misses = 0;
+    state.showResetButton = false;
   
     updateControls();
     setPadDisabled(true);
@@ -734,6 +762,7 @@
       ? `ミス ${state.misses}かい\nベスト こうしん！`
       : `ミス ${state.misses}かい\nベスト ${state.best}もん`;
 
+    state.showResetButton = true;
     showMessage(`${state.score}もん\nできた！`, subText);
 
     mainBtn.disabled = false;
@@ -749,6 +778,7 @@
     state.score = 0;
     state.misses = 0;
     state.endAt = Date.now() + 30000;
+    state.showResetButton = false;
   
     mainBtn.disabled = true;
     mainBtn.textContent = "ちょうせん中";
@@ -844,6 +874,13 @@
     }
   }
 
+  function resetBestRecord() {
+    state.best = 0;
+    localStorage.removeItem(STORAGE_BEST_KEY);
+    state.showResetButton = false;
+    showMessage(`${state.score}もん\nできた！`, `ミス ${state.misses}かい\nベストきろくを リセットしたよ`);
+  }
+
   digitButtons.forEach(btn => {
     btn.addEventListener("click", () => {
       handleDigit(Number(btn.dataset.digit));
@@ -854,6 +891,10 @@
     if (state.mode === "challenge" && !state.challengeRunning) {
       startChallenge();
     }
+  });
+
+  resultResetBtn.addEventListener("click", () => {
+    resetBestRecord();
   });
 
   practiceModeBtn.addEventListener("click", () => {
