@@ -471,7 +471,7 @@
                 <div class="sumRow">
                   <div class="sumOp ghost">+</div>
                   <div class="sumDigit ghost">8</div>
-                  <div id="answerNum" class="sumDigit answerValue">9</div>
+                  <div id="answerNum" class="sumDigit answerValue"></div>
                 </div>
               </div>
             </div>
@@ -643,7 +643,7 @@
   }
 
   function hideAnswer() {
-    answerNum.textContent = state.current ? String(state.current.answer) : "";
+    answerNum.textContent = "";
     answerNum.classList.remove("show", "correct");
   }
 
